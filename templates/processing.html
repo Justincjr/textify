@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Textify</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        h1 {
+            font-size: 2rem;
+            color: #b819c1;
+        }
+        p {
+            font-size: 1.2rem;
+            color: #555;
+        }
+        .container {
+            text-align: center;
+            padding: 10px;
+            border: 1px solid #ddd;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            width: 80%;
+            max-width: 800px;
+        }
+        .transcription {
+            text-align: left;
+            margin-top: 20px;
+            font-size: 1rem;
+            color: #333;
+            width: 80%;
+            max-width: 800px;
+        }
+        .bubble {
+            background-color: #e0e0e0;
+            border-radius: 20px;
+            padding: 10px;
+            margin: 10px 0;
+            position: relative;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .bubble.Guest-1 {
+            background-color: #4CAF50;
+            color: #fff;
+        }
+        .bubble.Guest-2 {
+            background-color: #2196F3;
+            color: #fff;
+        }
+        .bubble.Guest-3 {
+            background-color: #078d9e;
+            color: #fff;
+        }
+        .bubble.Guest-4 {
+            background-color: #922307;
+            color: #fff;
+        }
+        .highlight {
+            color: #da0909;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Azalea Textify</h1>
+        <p>Your file is being processed. You will receive an email once the process is complete.</p>
+        <p>You may now close this tab or view the transcription below.</p>
+    </div>
+    <div class="transcription" id="transcription"></div>
+    <script>
+        const socket = io();
+
+        socket.on('transcription_update', function(data) {
+            console.log(data);
+            const transcriptionDiv = document.getElementById('transcription');
+            const bubble = document.createElement('div');
+            bubble.className = `bubble ${data.speaker_id}`;
+            bubble.innerHTML = `<span class="highlight">${data.speaker_id}:</span> ${data.text}`;
+            transcriptionDiv.appendChild(bubble);
+        });
+    </script>
+</body>
+</html>

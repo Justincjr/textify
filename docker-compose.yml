@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  web1:
+    image: public.ecr.aws/m0c5k4m4/textify:latest
+    ports:
+      - "5001:5000"
+    environment:
+      - key=${KEY}
+      - region=${REGION}
+      - api_key=${API_KEY}
+      - azure_endpoint=${AZURE_ENDPOINT}
+      - deployment=${DEPLOYMENT}
+      - email_username=${EMAIL_USERNAME}
+      - email_password=${EMAIL_PASSWORD}
+      - sender_email=${SENDER_EMAIL}
+
+  web2:
+    image: public.ecr.aws/m0c5k4m4/textify:latest
+    ports:
+      - "5002:5000"
+    environment:
+      - key=${KEY}
+      - region=${REGION}
+      - api_key=${API_KEY}
+      - azure_endpoint=${AZURE_ENDPOINT}
+      - deployment=${DEPLOYMENT}
+      - email_username=${EMAIL_USERNAME}
+      - email_password=${EMAIL_PASSWORD}
+      - sender_email=${SENDER_EMAIL}
+
+  web3:
+    image: public.ecr.aws/m0c5k4m4/textify:latest
+    ports:
+      - "5003:5000"
+    environment:
+      - key=${KEY}
+      - region=${REGION}
+      - api_key=${API_KEY}
+      - azure_endpoint=${AZURE_ENDPOINT}
+      - deployment=${DEPLOYMENT}
+      - email_username=${EMAIL_USERNAME}
+      - email_password=${EMAIL_PASSWORD}
+      - sender_email=${SENDER_EMAIL}
